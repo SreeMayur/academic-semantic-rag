@@ -42,8 +42,10 @@ This project resolves these failure modes via a modular 5-stage pipeline:
 
 ### Key Technical Components:
 - **Layout-Aware PDF Ingestion:** PyMuPDF (`pymupdf`) extracts blocks according to natural reading order, preserving 2-column boundaries, headings, and page coordinates.
-- **Hybrid Retrieval (Dense + Sparse):** Merges semantic vector similarity (`sentence-transformers/all-MiniLM-L6-v2` via ChromaDB) with sparse keyword matching (`rank-bm25`) using **Reciprocal Rank Fusion (RRF)**:
-  $$\text{RRF\_Score}(d) = \sum_{m \in M} \frac{1}{k + \text{rank}_m(d)}$$
+- **Hybrid Retrieval (Dense + Sparse):** Merges semantic vector similarity (`sentence-transformers/all-MiniLM-L6-v2` via ChromaDB) with sparse keyword matching (`rank-bm25`) using **Reciprocal Rank Fusion (RRF)**.
+
+$$\mathrm{RRF\_Score}(d) = \sum_{m \in M} \frac{1}{k + \mathrm{rank}_m(d)}$$
+
 - **Local Cross-Encoder Re-ranking:** Re-scores fused candidates using `FlashRank` (`ms-marco-TinyBERT-L-2-v2`) locally on CPU to prioritize semantic alignment before prompting.
 - **Agentic Abstract Router:** Evaluates query intent against corpus abstracts to prune irrelevant documents before retrieval.
 - **Hierarchical Map-Reduce Synthesis:**
