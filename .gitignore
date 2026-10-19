@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+.env
+chroma_db/
+data/cache/
+.DS_Store
+
+# Large raw academic papers
+data/sample_papers/*.pdf
+
+# Local diagnostic and test scripts
+test_*.py
